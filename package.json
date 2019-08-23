@@ -10,5 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "compromise": "^11.14.2"
+  },
+  "devDependencies": {
+    "ava": "^2.3.0"
+  },
+  "scripts": {
+    "test": "ava"
   }
 }

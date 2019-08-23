@@ -1,5 +1,5 @@
 const fs = require('fs')
-const nlp = require('compromise')
+const proseToEGS = require('./lib')
 
 const filename = process.argv[2]
 if (!filename) {
@@ -8,17 +8,5 @@ if (!filename) {
 }
 
 const text = fs.readFileSync(filename, 'utf-8')
-const lines = text.split(/[.\n]+/).filter(x => x)
-
-const block = line => {
-  return '- ' + nlp(line).clauses().terms().data().reduce((accum, current, i, arr) => {
-    const breakLine = current.bestTag === 'Preposition' || current.bestTag === 'Verb'
-    const endOfSentence = i === arr.length - 1
-    return accum + (breakLine ? '\n' : '')
-      + current.text.toLowerCase().trim()
-      + (endOfSentence ? '.' : ' ')
-  }, '')
-}
-
-const output = lines.map(line => block(line) + '\n').join('\n')
+const output = proseToEGS(text)
 console.log(output)
