@@ -14,6 +14,10 @@ test('periods', t => {
 })
 
 test('lowercase', t => {
-	t.is(proseToEGS('This should become ALL Lowercase.'), `- this should become all lowercase.
+  t.is(proseToEGS('This should become ALL Lowercase.'), `- this should become all lowercase.
 `)
+})
+
+test('contractions', t => {
+	t.is(proseToEGS('this won\'t work.'), '- this \nwill not work.\n')
 })

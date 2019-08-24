@@ -18,7 +18,7 @@ const proseToEGS = text => {
   const lines = text.split(/[.\n]+/).filter(x => x)
 
   const block = line => {
-    return '- ' + nlp(line).clauses().terms().data().reduce((accum, current, i, arr) => {
+    return '- ' + nlp(line).normalize({ contractions: true }).clauses().terms().data().reduce((accum, current, i, arr) => {
       const endOfSentence = i === arr.length - 1
       return accum + (breakLine(current) ? '\n' : '')
         + current.text.toLowerCase().trim()
